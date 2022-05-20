@@ -45,17 +45,52 @@ function AddContact(firstName, lastName, address, city, state, zipCode, phoneNum
 }
 
 function GetContactDetails(){
-  let firstName = prompt('Enter your firstName  ');
-  let lastName = prompt('Enter your lastName  ');
-  let address = prompt('Enter your address  ');
-  let city = prompt('Enter your city  ');
-  let state = prompt('Enter your State  ');
-  let zipCode = prompt('Enter your zipcode  ');
-  let phoneNumber = prompt('Enter your Phone  ');
-  let emailId = prompt('Enter your Email  ');
+  try 
+  {
+    let namePattern = new RegExp('^[A-Z]{1}[a-z]{2,}$');
+    let addressPattern = new RegExp('^[A-Za-z]{4,}$'); 
+    let zipCodePattern = new RegExp('^[1-9]{1}[0-9]{2}[ ]?[0-9]{3}$');
+    let phoneNumPattern = new RegExp('^\\+?91[ ]?[1-9][0-9]{9}$');
+    let emailIdPattern = new RegExp('^[a-zA-Z0-9]{3,}([._+-][0-9a-zA-Z]{2,})*@[0-9a-zA-Z]+[.]?([a-zA-Z]{2,4})+[.]?([a-zA-Z]{2,3})*$');
+    let firstName = prompt('Enter your firstName  ');
+    if (!namePattern.test(firstName))
+        throw 'First name should have minimum 3 characters starts with uppercase';
 
-  let contactDetails = AddContact(firstName, lastName, address, city, state, zipCode, phoneNumber, emailId);
-  console.log("\nDetails:-");
-  console.log(contactDetails.toString());
+    let lastName = prompt('Enter your lastName  ');
+    if (!namePattern.test(lastName))
+        throw 'First name should have minimum 3 characters starts with uppercase';
+
+    let address = prompt('Enter your address  ');
+    if (!addressPattern.test(address))
+        throw 'Address should have minimum 4 characters';
+
+    let city = prompt('Enter your city  ');
+    if (!addressPattern.test(city))
+        throw 'City should have minimum 4 characters';
+
+    let state = prompt('Enter your State  ');
+    if (!addressPattern.test(state))
+        throw 'State should have minimum 4 characters';
+
+    let zipCode = prompt('Enter your zipcode  ');
+    if (!zipCodePattern.test(zipCode))
+        throw 'Zipcode is not valid';
+
+    let phoneNumber = prompt('Enter your Phone  ');
+    if (!phoneNumPattern.test(phoneNumber))
+        throw 'Phone number is not valid';
+
+    let emailId = prompt('Enter your Email  ');
+    if (!emailIdPattern.test(emailId))
+        throw 'Email id is not valid';
+
+    let contactDetails = AddContact(firstName, lastName, address, city, state, zipCode, phoneNumber, emailId);
+    console.log("\nContact Details: -->");
+    console.log(contactDetails.toString());
+  } 
+  catch (ex) 
+  {
+    console.error(ex);
+  }
 }
 GetContactDetails();
